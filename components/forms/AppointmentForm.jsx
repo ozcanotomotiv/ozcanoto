@@ -1,10 +1,8 @@
 "use client";
 
 import { useMemo, useState } from "react";
-import { addDoc, collection, serverTimestamp } from "firebase/firestore";
 import { toast } from "sonner";
 import Button from "@/components/ui/Button";
-import { db } from "@/lib/firebase";
 import Select from "@/components/ui/Select";
 import DatePicker from "@/components/ui/DatePicker";
 
@@ -16,7 +14,7 @@ const serviceOptions = [
 
 export default function AppointmentForm({ variant = "full" }) {
   const initial = useMemo(
-    () => ({ name: "", phone: "", service: "", date: "", message: "" }),
+    () => ({ name: "", email: "", phone: "", service: "", date: "", message: "" }),
     []
   );
 
@@ -34,21 +32,63 @@ export default function AppointmentForm({ variant = "full" }) {
     e.preventDefault();
 
     if (!form.name.trim()) return toast.error("Lütfen adınızı yazın.");
+    if (!form.email.trim()) return toast.error("Lütfen e-posta adresinizi yazın.");
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(form.email.trim())) {
+      return toast.error("Lütfen geçerli bir e-posta adresi yazın.");
+    }
     if (!form.phone.trim()) return toast.error("Lütfen telefon numaranızı yazın.");
     if (!form.service.trim()) return toast.error("Lütfen hizmet seçin.");
     if (!form.date.trim()) return toast.error("Lütfen tarih seçin.");
 
     setLoading(true);
     try {
-      await addDoc(collection(db, "appointments"), {
+      const payload = {
         name: form.name.trim(),
+        email: form.email.trim(),
         phone: form.phone.trim(),
         service: form.service.trim(),
         date: form.date,
         message: form.message.trim(),
-        createdAt: serverTimestamp(),
-        status: "new",
+      };
+
+      const r = await fetch("/api/appointments", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload),
       });
+
+      if (!r.ok) {
+        let msg = "Gönderim başarısız. Lütfen tekrar deneyin.";
+        try {
+          const data = await r.json();
+          if (data?.error === "missing_fields") {
+            msg = "Lütfen tüm zorunlu alanları doldurun.";
+          }
+          if (data?.error === "server_error") {
+            msg = "Sunucu hatası. Lütfen biraz sonra tekrar deneyin.";
+          }
+        } catch {
+          // ignore
+        }
+        return toast.error(msg);
+      }
+
+      try {
+        const data = await r.json();
+        if (data?.emailSent === false) {
+          toast.message(
+            "Randevu kaydı alındı; şirkete bildirim maili gönderilemedi."
+          );
+        }
+
+        if (data?.userEmailSent === false) {
+          toast.message(
+            "Randevu kaydı alındı; size bilgilendirme maili gönderilemedi."
+          );
+        }
+      } catch {
+        // ignore
+      }
 
       toast.success("Randevu talebiniz alındı. En kısa sürede dönüş yapacağız.");
       setForm(initial);
@@ -73,6 +113,15 @@ export default function AppointmentForm({ variant = "full" }) {
         className={inputClass}
         placeholder="Ad Soyad"
         autoComplete="name"
+      />
+      <input
+        name="email"
+        value={form.email}
+        onChange={onChange}
+        className={inputClass}
+        placeholder="E-posta"
+        inputMode="email"
+        autoComplete="email"
       />
       <input
         name="phone"

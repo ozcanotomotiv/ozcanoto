@@ -28,7 +28,7 @@ export default function ContactPage() {
         </div>
 
         <div className="mt-8 grid gap-6 md:grid-cols-2">
-          <Card>
+          <Card className="!border-white/10 !bg-white/5 !text-white !ring-white/10">
             <div className="font-[var(--font-heading)] text-lg">Randevu</div>
             <div className="mt-4">
               <AppointmentForm />
@@ -36,7 +36,7 @@ export default function ContactPage() {
           </Card>
 
           <div className="grid gap-6">
-            <Card>
+            <Card className="!border-white/10 !bg-white/5 !text-white !ring-white/10">
               <div className="font-[var(--font-heading)] text-lg">Bilgiler</div>
               <div className="mt-4 grid gap-2 text-sm text-white/80">
                 <a
@@ -93,7 +93,7 @@ export default function ContactPage() {
               </div>
             </Card>
 
-            <Card>
+            <Card className="!border-white/10 !bg-white/5 !text-white !ring-white/10">
               <div className="font-[var(--font-heading)] text-lg">
                 Çalışma Saatleri
               </div>
