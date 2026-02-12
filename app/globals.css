@@ -1,0 +1,86 @@
+@import "tailwindcss";
+
+:root {
+  --brand: #0b0f14;
+  --brand-foreground: #ffffff;
+  --accent: #f39c12;
+  --muted: #f6f6f7;
+  --surface: #ffffff;
+  --text: #0b0f14;
+  --text-muted: #4b5563;
+  --ring: rgba(243, 156, 18, 0.35);
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --shadow-soft: 0 12px 24px rgba(11, 15, 20, 0.12);
+}
+
+@theme inline {
+  --color-brand: var(--brand);
+  --color-brand-foreground: var(--brand-foreground);
+  --color-accent: var(--accent);
+  --color-muted: var(--muted);
+  --color-surface: var(--surface);
+  --color-text: var(--text);
+  --color-text-muted: var(--text-muted);
+  --color-ring: var(--ring);
+  --radius-sm: var(--radius-sm);
+  --radius-md: var(--radius-md);
+  --shadow-soft: var(--shadow-soft);
+  --font-sans: var(--font-body);
+  --font-heading: var(--font-heading);
+}
+
+body {
+  background: var(--brand);
+  color: var(--brand-foreground);
+  overflow-x: hidden;
+  font-family: var(--font-body), ui-sans-serif, system-ui, -apple-system,
+    BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial,
+    "Noto Sans", "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+  text-rendering: geometricPrecision;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+html {
+  overflow-x: hidden;
+}
+
+.scrollbar-none {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.scrollbar-none::-webkit-scrollbar {
+  width: 0;
+  height: 0;
+}
+
+@keyframes marquee-x {
+  0% {
+    transform: translate3d(0, 0, 0);
+  }
+  100% {
+    transform: translate3d(-50%, 0, 0);
+  }
+}
+
+.marquee {
+  overflow: hidden;
+}
+
+.marquee-track {
+  display: flex;
+  width: 200%;
+  animation: marquee-x 22s linear infinite;
+  will-change: transform;
+}
+
+.marquee-group {
+  display: flex;
+  width: 50%;
+}
+
+.marquee:hover .marquee-track {
+  animation-play-state: paused;
+}
