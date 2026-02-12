@@ -16,13 +16,13 @@ export default function ContactPage() {
     "&output=embed";
 
   return (
-    <div className="bg-muted">
+    <div>
       <Container className="py-10 md:py-14">
         <div>
-          <h1 className="font-[var(--font-heading)] text-3xl text-text md:text-4xl">
+          <h1 className="font-[var(--font-heading)] text-3xl md:text-4xl">
             İletişim
           </h1>
-          <p className="mt-2 text-sm text-text-muted md:text-base">
+          <p className="mt-2 text-sm text-white/80 md:text-base">
             Hızlı randevu için arayın veya formu doldurun.
           </p>
         </div>
@@ -38,21 +38,21 @@ export default function ContactPage() {
           <div className="grid gap-6">
             <Card>
               <div className="font-[var(--font-heading)] text-lg">Bilgiler</div>
-              <div className="mt-4 grid gap-2 text-sm text-text-muted">
+              <div className="mt-4 grid gap-2 text-sm text-white/80">
                 <a
-                  className="font-semibold text-text hover:underline"
+                  className="font-semibold text-white hover:underline"
                   href={`tel:${siteConfig.phoneTel}`}
                 >
                   Telefon: {siteConfig.phoneDisplay}
                 </a>
                 <a
-                  className="font-semibold text-text hover:underline"
+                  className="font-semibold text-white hover:underline"
                   href={`tel:${siteConfig.faxTel}`}
                 >
                   Faks: {siteConfig.faxDisplay}
                 </a>
                 <a
-                  className="font-semibold text-text hover:underline"
+                  className="font-semibold text-white hover:underline"
                   href={`mailto:${siteConfig.email}`}
                 >
                   {siteConfig.email}
@@ -63,7 +63,7 @@ export default function ContactPage() {
                   target="_blank"
                   rel="noreferrer"
                 >
-                  <span className="font-semibold text-text">Adres:</span>{" "}
+                  <span className="font-semibold text-white">Adres:</span>{" "}
                   {siteConfig.address}
                 </a>
               </div>
@@ -79,11 +79,11 @@ export default function ContactPage() {
                   referrerPolicy="no-referrer-when-downgrade"
                 />
               </div>
-              <div className="p-4 text-xs text-text-muted">
+              <div className="p-4 text-xs text-white/70">
                 Haritada açmak için{" "}
                 <a
                   href={siteConfig.mapsUrl}
-                  className="font-semibold text-text hover:underline"
+                  className="font-semibold text-white hover:underline"
                   target="_blank"
                   rel="noreferrer"
                 >
@@ -97,12 +97,12 @@ export default function ContactPage() {
               <div className="font-[var(--font-heading)] text-lg">
                 Çalışma Saatleri
               </div>
-              <div className="mt-4 grid gap-2 text-sm text-text-muted">
+              <div className="mt-4 grid gap-2 text-sm text-white/80">
                 <div>
-                  <span className="font-semibold text-text">{siteConfig.workingHours.week}</span>
+                  <span className="font-semibold text-white">{siteConfig.workingHours.week}</span>
                 </div>
                 <div>
-                  <span className="font-semibold text-text">{siteConfig.workingHours.sunday}</span>
+                  <span className="font-semibold text-white">{siteConfig.workingHours.sunday}</span>
                 </div>
               </div>
             </Card>

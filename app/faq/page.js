@@ -52,13 +52,13 @@ const faqs = [
 
 export default function SssPage() {
   return (
-    <div className="bg-muted">
+    <div>
       <Container className="py-10 md:py-14">
         <div>
-          <h1 className="font-[var(--font-heading)] text-3xl text-text md:text-4xl">
+          <h1 className="font-[var(--font-heading)] text-3xl md:text-4xl">
             Sıkça Sorulan Sorular
           </h1>
-          <p className="mt-2 max-w-2xl text-sm text-text-muted md:text-base">
+          <p className="mt-2 max-w-2xl text-sm text-white/80 md:text-base">
             Randevu, boyasız göçük onarımı ve bakım süreçleriyle ilgili en sık
             sorulan soruları burada topladık.
           </p>

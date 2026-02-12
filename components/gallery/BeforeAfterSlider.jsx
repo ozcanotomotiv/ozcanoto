@@ -1,9 +1,12 @@
 "use client";
 
 import { useId, useState } from "react";
+import Image from "next/image";
 import { cn } from "@/lib/utils";
 
 export default function BeforeAfterSlider({
+  beforeSrc,
+  afterSrc,
   beforeLabel = "Önce",
   afterLabel = "Sonra",
   className,
@@ -19,16 +22,36 @@ export default function BeforeAfterSlider({
       )}
     >
       <div className="absolute inset-0">
-        <div className="absolute inset-0 grid place-items-center text-xs font-semibold text-text-muted">
-          {beforeLabel}
-        </div>
+        {beforeSrc ? (
+          <Image
+            src={beforeSrc}
+            alt={beforeLabel}
+            fill
+            sizes="(max-width: 768px) 100vw, 50vw"
+            className="object-cover"
+          />
+        ) : (
+          <div className="absolute inset-0 grid place-items-center text-xs font-semibold text-text-muted">
+            {beforeLabel}
+          </div>
+        )}
         <div
           className="absolute inset-0 bg-white"
           style={{ clipPath: `inset(0 ${100 - value}% 0 0)` }}
         >
-          <div className="absolute inset-0 grid place-items-center text-xs font-semibold text-text-muted">
-            {afterLabel}
-          </div>
+          {afterSrc ? (
+            <Image
+              src={afterSrc}
+              alt={afterLabel}
+              fill
+              sizes="(max-width: 768px) 100vw, 50vw"
+              className="object-cover"
+            />
+          ) : (
+            <div className="absolute inset-0 grid place-items-center text-xs font-semibold text-text-muted">
+              {afterLabel}
+            </div>
+          )}
         </div>
 
         <div

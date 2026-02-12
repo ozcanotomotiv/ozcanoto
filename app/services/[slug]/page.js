@@ -49,14 +49,14 @@ export default async function ServiceDetailPage({ params }) {
   }
 
   return (
-    <div className="bg-muted">
+    <div>
       <Container className="py-10 md:py-14">
         <div className="grid gap-6 md:grid-cols-[1.2fr_0.8fr] md:items-start">
           <div>
-            <h1 className="font-[var(--font-heading)] text-3xl text-text md:text-4xl">
+            <h1 className="font-[var(--font-heading)] text-3xl md:text-4xl">
               {service.title}
             </h1>
-            <p className="mt-4 text-sm text-text-muted md:text-base">
+            <p className="mt-4 text-sm text-white/80 md:text-base">
               {service.fullDesc}
             </p>
 
@@ -70,17 +70,17 @@ export default async function ServiceDetailPage({ params }) {
             </div>
           </div>
 
-          <Card className="md:sticky md:top-20">
+          <Card className="md:sticky md:top-20 !border-white/10 !bg-white/5 !text-white !ring-white/10">
             <div className="font-[var(--font-heading)] text-lg">Hızlı Bilgi</div>
-            <div className="mt-3 grid gap-2 text-sm text-text-muted">
+            <div className="mt-3 grid gap-2 text-sm text-white/80">
               <div>
-                <span className="font-semibold text-text">Konum:</span> {siteConfig.city}
+                <span className="font-semibold text-white">Konum:</span> {siteConfig.city}
               </div>
               <div>
-                <span className="font-semibold text-text">Süre:</span> İşe göre
+                <span className="font-semibold text-white">Süre:</span> İşe göre
               </div>
               <div>
-                <span className="font-semibold text-text">Ücret:</span> Araca göre
+                <span className="font-semibold text-white">Ücret:</span> Araca göre
               </div>
             </div>
           </Card>

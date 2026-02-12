@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import Image from "next/image";
 import Container from "@/components/ui/Container";
 
@@ -9,35 +9,77 @@ const team = [
     name: "Usta Teknisyen",
     role: "Mekanik Onarım",
     src: "/images/images3.jpg",
+    badge: "🔧",
   },
   {
     name: "Göçük Uzmanı",
     role: "Boyasız Onarım",
     src: "/images/images1.jpg",
+    badge: "🛠️",
   },
   {
     name: "Bakım Sorumlusu",
     role: "Periyodik Bakım",
     src: "/images/images2.jpg",
+    badge: "⚙️",
   },
   {
     name: "Servis Danışmanı",
     role: "Randevu & Teslim",
     src: "/images/images4.jpg",
+    badge: "📋",
   },
 ];
 
 export default function TeamSlider() {
-  const [touchPaused, setTouchPaused] = useState(false);
+  const wrapperRef = useRef(null);
+  const trackRef = useRef(null);
+  const positionRef = useRef(0);
+  const speedRef = useRef(0.5);
+  const rafRef = useRef(0);
 
   const slides = useMemo(() => team, []);
 
-  // On touch devices, pause while touching to allow reading
   useEffect(() => {
-    if (!touchPaused) return;
-    const t = window.setTimeout(() => setTouchPaused(false), 2000);
-    return () => window.clearTimeout(t);
-  }, [touchPaused]);
+    const track = trackRef.current;
+    if (!track) return;
+
+    const animate = () => {
+      positionRef.current -= speedRef.current;
+
+      const half = track.scrollWidth / 2;
+      if (half > 0) {
+        if (positionRef.current <= -half) positionRef.current += half;
+        if (positionRef.current > 0) positionRef.current -= half;
+      }
+
+      track.style.transform = `translate3d(${positionRef.current}px, 0, 0)`;
+      rafRef.current = window.requestAnimationFrame(animate);
+    };
+
+    rafRef.current = window.requestAnimationFrame(animate);
+    return () => window.cancelAnimationFrame(rafRef.current);
+  }, []);
+
+  const onMouseMove = (e) => {
+    const el = wrapperRef.current;
+    if (!el) return;
+    const rect = el.getBoundingClientRect();
+    const x = e.clientX - rect.left;
+    const pct = x / rect.width;
+
+    if (pct > 0.5) {
+      const s = 0.5 + (pct - 0.5) * 4;
+      speedRef.current = s;
+    } else {
+      const s = -((0.5 - pct) * 4);
+      speedRef.current = s;
+    }
+  };
+
+  const onMouseLeave = () => {
+    speedRef.current = 0.5;
+  };
 
   return (
     <section className="relative overflow-hidden border-y border-white/10 bg-black">
@@ -60,37 +102,55 @@ export default function TeamSlider() {
         </div>
 
         <div
-          className={
-            "marquee mt-8 rounded-[var(--radius-md)] border border-white/10 bg-white/5 ring-1 ring-white/10" +
-            (touchPaused ? "" : "")
-          }
-          onTouchStart={() => setTouchPaused(true)}
+          ref={wrapperRef}
+          className="team-slider-wrapper mt-8 rounded-[var(--radius-md)] border border-white/10 bg-white/5 ring-1 ring-white/10"
+          onMouseMove={onMouseMove}
+          onMouseLeave={onMouseLeave}
         >
+          <div className="team-slider-overlay-left" />
+          <div className="team-slider-overlay-right" />
+
           <div
-            className="marquee-track"
-            style={{ animationPlayState: touchPaused ? "paused" : "running" }}
+            ref={trackRef}
+            className="inline-flex will-change-transform"
           >
             {[0, 1].map((g) => (
-              <div key={g} className="marquee-group items-center gap-6 px-4 py-6">
+              <div
+                key={g}
+                data-group={String(g)}
+                className="inline-flex flex-nowrap gap-8 px-6 py-10"
+              >
                 {slides.map((x) => (
                   <div
                     key={`${g}-${x.name}`}
-                    className="mx-2 inline-flex min-w-[280px] items-center gap-4 rounded-[var(--radius-md)] border border-white/10 bg-black/45 px-5 py-4 text-white shadow-[var(--shadow-soft)] ring-1 ring-white/10"
+                    className="team-card group relative flex min-w-[320px] flex-none flex-col items-center gap-5 overflow-hidden rounded-[24px] border border-white/10 bg-white/5 p-7 text-white shadow-[var(--shadow-soft)] ring-1 ring-white/10 transition-transform duration-300 ease-[cubic-bezier(0.175,0.885,0.32,1.275)] hover:-translate-y-3 hover:scale-[1.04] hover:border-[rgba(243,156,18,0.45)]"
                   >
-                    <div className="relative size-14 overflow-hidden rounded-full ring-1 ring-white/10">
-                      <Image
-                        src={x.src}
-                        alt={x.name}
-                        fill
-                        sizes="56px"
-                        className="object-cover"
-                      />
+                    <div className="pointer-events-none absolute inset-[6px] rounded-[20px] bg-white/5 backdrop-blur" />
+                    <div className="pointer-events-none absolute -left-1/2 -top-1/2 size-[200%] rotate-45 bg-gradient-to-r from-transparent via-[rgba(243,156,18,0.12)] to-transparent opacity-70 transition-transform duration-500 group-hover:translate-x-1/2" />
+
+                    <div className="absolute right-5 top-5 grid size-12 place-items-center rounded-full border border-[rgba(243,156,18,0.35)] bg-[rgba(243,156,18,0.16)] text-xl shadow-[0_10px_30px_rgba(243,156,18,0.18)]">
+                      {x.badge}
                     </div>
-                    <div className="min-w-0">
-                      <div className="truncate font-[var(--font-heading)] text-base">
+
+                    <div className="relative z-10 size-[112px]">
+                      <div className="team-avatar-glow" />
+                      <div className="team-avatar-ring" />
+                      <div className="relative size-full overflow-hidden rounded-full ring-1 ring-white/10">
+                        <Image
+                          src={x.src}
+                          alt={x.name}
+                          fill
+                          sizes="112px"
+                          className="object-cover"
+                        />
+                      </div>
+                    </div>
+
+                    <div className="relative z-10 text-center">
+                      <div className="text-lg font-[var(--font-heading)]">
                         {x.name}
                       </div>
-                      <div className="mt-0.5 truncate text-sm text-white/70">
+                      <div className="mt-2 inline-flex rounded-full border border-[rgba(243,156,18,0.30)] bg-[rgba(243,156,18,0.10)] px-4 py-2 text-sm font-semibold text-accent">
                         {x.role}
                       </div>
                     </div>

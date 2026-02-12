@@ -31,9 +31,7 @@ export default function Home() {
       <Reveal from="left" distance={26} delayMs={160} once={false}>
         <Coverage />
       </Reveal>
-      <Reveal from="right" distance={26} delayMs={180} once={false}>
-        <GalleryPreview />
-      </Reveal>
+      <GalleryPreview />
       <Reveal from="left" distance={26} delayMs={200} once={false}>
         <FaqPreview />
       </Reveal>

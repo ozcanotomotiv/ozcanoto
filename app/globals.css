@@ -65,6 +65,15 @@ html {
   }
 }
 
+@keyframes team-ring-rotate {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
 .marquee {
   overflow: hidden;
 }
@@ -83,4 +92,61 @@ html {
 
 .marquee:hover .marquee-track {
   animation-play-state: paused;
+}
+
+.team-slider-wrapper {
+  position: relative;
+  overflow: hidden;
+}
+
+.team-slider-overlay-left,
+.team-slider-overlay-right {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 180px;
+  z-index: 10;
+  pointer-events: none;
+}
+
+.team-slider-overlay-left {
+  left: 0;
+  background: linear-gradient(to right, rgba(11, 15, 20, 1), transparent);
+}
+
+.team-slider-overlay-right {
+  right: 0;
+  background: linear-gradient(to left, rgba(11, 15, 20, 1), transparent);
+}
+
+.team-avatar-ring {
+  position: absolute;
+  inset: -8px;
+  border-radius: 999px;
+  background: linear-gradient(135deg, #f39c12, #ffa500, #f39c12);
+  opacity: 0.7;
+  animation: team-ring-rotate 3s linear infinite;
+}
+
+.team-card:hover .team-avatar-ring {
+  opacity: 1;
+  animation-duration: 1s;
+}
+
+.team-avatar-glow {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 140px;
+  height: 140px;
+  border-radius: 999px;
+  background: radial-gradient(circle, rgba(243, 156, 18, 0.35), transparent 70%);
+  filter: blur(18px);
+  opacity: 0;
+  transition: opacity 250ms ease;
+}
+
+.team-card:hover .team-avatar-glow {
+  opacity: 1;
 }
