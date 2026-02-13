@@ -55,10 +55,10 @@ export default function BeforeAfterSlider({
         </div>
 
         <div className="absolute left-3 top-3 inline-flex rounded-full bg-black/65 px-3 py-1 text-[11px] font-semibold tracking-wide text-white ring-1 ring-white/10">
-          Öncesi
+          Sonrası
         </div>
         <div className="absolute right-3 top-3 inline-flex rounded-full bg-black/65 px-3 py-1 text-[11px] font-semibold tracking-wide text-white ring-1 ring-white/10">
-          Sonrası
+          Öncesi
         </div>
 
         <div
