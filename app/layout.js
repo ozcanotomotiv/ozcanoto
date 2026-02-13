@@ -65,7 +65,7 @@ export default function RootLayout({ children }) {
             aria-label="Instagram"
             className="group grid size-14 place-items-center rounded-full border border-white/15 bg-black/65 shadow-[0_10px_30px_rgba(0,0,0,0.35)] backdrop-blur hover:bg-black/75"
           >
-            <span className="transition-transform duration-500 ease-out group-hover:rotate-[360deg]">
+            <span className="transition-transform duration-500 ease-out group-hover:rotate-[360deg] group-active:rotate-[360deg] group-focus-visible:rotate-[360deg]">
               <Image src="/icon/instagram.svg" alt="Instagram" width={28} height={28} />
             </span>
           </a>
@@ -77,7 +77,7 @@ export default function RootLayout({ children }) {
             aria-label="WhatsApp"
             className="group grid size-14 place-items-center rounded-full border border-white/15 bg-black/65 shadow-[0_10px_30px_rgba(0,0,0,0.35)] backdrop-blur hover:bg-black/75"
           >
-            <span className="transition-transform duration-500 ease-out group-hover:rotate-[360deg]">
+            <span className="transition-transform duration-500 ease-out group-hover:rotate-[360deg] group-active:rotate-[360deg] group-focus-visible:rotate-[360deg]">
               <Image src="/icon/whatsapp.svg" alt="WhatsApp" width={28} height={28} />
             </span>
           </a>
@@ -87,7 +87,7 @@ export default function RootLayout({ children }) {
             aria-label="Telefon"
             className="group grid size-14 place-items-center rounded-full border border-white/15 bg-black/65 shadow-[0_10px_30px_rgba(0,0,0,0.35)] backdrop-blur hover:bg-black/75"
           >
-            <span className="transition-transform duration-500 ease-out group-hover:rotate-[360deg]">
+            <span className="transition-transform duration-500 ease-out group-hover:rotate-[360deg] group-active:rotate-[360deg] group-focus-visible:rotate-[360deg]">
               <Image src="/icon/phone.svg" alt="Telefon" width={28} height={28} />
             </span>
           </a>

@@ -61,7 +61,7 @@ export default function BrandsPage() {
                   src={b.src}
                   alt={b.alt}
                   loading="lazy"
-                  className="max-h-[92px] w-auto transition-transform duration-700 ease-out group-hover:rotate-[360deg]"
+                  className="max-h-[92px] w-auto transition-transform duration-700 ease-out group-hover:rotate-[360deg] group-active:rotate-[360deg] group-focus-visible:rotate-[360deg]"
                 />
               </div>
             </div>

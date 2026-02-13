@@ -106,7 +106,7 @@ export default function Footer() {
                 rel="noreferrer"
                 aria-label="WhatsApp"
               >
-                <span className="transition-transform duration-500 ease-out group-hover:rotate-[360deg]">
+                <span className="transition-transform duration-500 ease-out group-hover:rotate-[360deg] group-active:rotate-[360deg] group-focus-visible:rotate-[360deg]">
                   <Image
                     src="/icon/whatsapp.svg"
                     alt="WhatsApp"
