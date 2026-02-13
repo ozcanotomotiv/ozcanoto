@@ -29,6 +29,10 @@ export const metadata = {
   },
   description:
     "İzmir'de 1999'dan beri boyasız göçük onarımı, periyodik bakım ve mekanik onarım. Hemen arayın, hızlı randevu alın.",
+  icons: {
+    icon: "/logo/logo.jpg",
+    apple: "/logo/logo.jpg",
+  },
   openGraph: {
     type: "website",
     locale: "tr_TR",
