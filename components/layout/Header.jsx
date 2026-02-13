@@ -6,10 +6,11 @@ import Image from "next/image";
 import Container from "@/components/ui/Container";
 import Button from "@/components/ui/Button";
 import { siteConfig } from "@/lib/siteConfig";
-import { ImageIcon, PhoneCall, Wrench } from "lucide-react";
+import { ImageIcon, PhoneCall, Wrench, BadgeCheck } from "lucide-react";
 
 const navItems = [
   { href: "/services", label: "Hizmetler", Icon: Wrench },
+  { href: "/brands", label: "Markalar", Icon: BadgeCheck },
   { href: "/gallery", label: "Galeri", Icon: ImageIcon },
   { href: "/contact", label: "İletişim", Icon: PhoneCall },
 ];

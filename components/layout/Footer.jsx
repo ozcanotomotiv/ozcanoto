@@ -66,6 +66,14 @@ export default function Footer() {
               </a>
               <a
                 className="hover:text-white"
+                href={siteConfig.whatsappUrl}
+                target="_blank"
+                rel="noreferrer"
+              >
+                WhatsApp: {siteConfig.whatsappDisplay}
+              </a>
+              <a
+                className="hover:text-white"
                 href={siteConfig.mapsUrl}
                 target="_blank"
                 rel="noreferrer"
@@ -90,6 +98,22 @@ export default function Footer() {
                 href={`tel:${siteConfig.phoneTel}`}
               >
                 Hemen Ara
+              </a>
+              <a
+                className="group inline-flex h-11 items-center justify-center rounded-[var(--radius-sm)] border border-white/20 px-4 font-semibold text-white hover:bg-white/10"
+                href={siteConfig.whatsappUrl}
+                target="_blank"
+                rel="noreferrer"
+                aria-label="WhatsApp"
+              >
+                <span className="transition-transform duration-500 ease-out group-hover:rotate-[360deg]">
+                  <Image
+                    src="/icon/whatsapp.svg"
+                    alt="WhatsApp"
+                    width={22}
+                    height={22}
+                  />
+                </span>
               </a>
               <a
                 className="inline-flex h-11 items-center justify-center rounded-[var(--radius-sm)] border border-white/20 px-4 font-semibold text-white hover:bg-white/10"

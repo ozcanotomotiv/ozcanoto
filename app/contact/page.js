@@ -58,6 +58,14 @@ export default function ContactPage() {
                   {siteConfig.email}
                 </a>
                 <a
+                  className="font-semibold text-white hover:underline"
+                  href={siteConfig.whatsappUrl}
+                  target="_blank"
+                  rel="noreferrer"
+                >
+                  WhatsApp: {siteConfig.whatsappDisplay}
+                </a>
+                <a
                   className="hover:underline"
                   href={siteConfig.mapsUrl}
                   target="_blank"

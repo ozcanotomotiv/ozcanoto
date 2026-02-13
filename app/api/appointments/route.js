@@ -127,7 +127,7 @@ async function sendAdminEmail({ name, email, phone, service, date, message, req 
   const list = getContactToList();
   const to = list.length === 1 ? list[0] : list;
   const from = getFromEmail();
-  const replyTo = getReplyToEmail();
+  const replyTo = email || getReplyToEmail();
 
   const subject = `Yeni Randevu Talebi: ${service} • ${name}`;
 
@@ -145,6 +145,22 @@ async function sendAdminEmail({ name, email, phone, service, date, message, req 
   ].join("\n");
 
   const origin = req?.headers?.get?.("origin") || "";
+  const mailtoSubject = `Randevu: ${service} • ${name}`;
+  const mailtoBody = [
+    `Merhaba ${name},`,
+    "",
+    "Randevu talebinizle ilgili dönüş yapıyoruz.",
+    "",
+    `Hizmet: ${service}`,
+    `Tarih: ${date}`,
+    `Telefon: ${phone}`,
+    "",
+    `${siteConfig.shortName}`,
+  ].join("\n");
+  const mailtoHref = `mailto:${email}?subject=${encodeURIComponent(
+    mailtoSubject
+  )}&body=${encodeURIComponent(mailtoBody)}`;
+
   const html = buildGlassEmailHtml({
     title: "Yeni randevu talebi",
     subtitle: `<strong style=\"color:#fff\">${escapeHtml(
@@ -158,7 +174,7 @@ async function sendAdminEmail({ name, email, phone, service, date, message, req 
       { k: "Tarih", v: escapeHtml(date) },
       { k: "Mesaj", v: escapeHtml(message || "-") },
     ],
-    primary: { label: "Müşteriye yaz", href: `mailto:${email}` },
+    primary: { label: "Müşteriye yaz", href: mailtoHref },
     secondary: { label: "Hemen ara", href: `tel:${phone}` },
     footer: `${escapeHtml(siteConfig.shortName)} • ${escapeHtml(
       siteConfig.phoneDisplay
@@ -202,8 +218,8 @@ async function sendUserConfirmationEmail({ name, email, phone, service, date, me
   const subject = `Randevu talebinizi aldık • ${siteConfig.shortName}`;
 
   const text = [
-    "Randevu talebiniz alınmıştır.",
-    "En kısa sürede sizinle iletişime geçeceğiz.",
+    "Merhaba, talebinizi aldık.",
+    "Size en kısa sürede geri döneceğiz :)",
     "",
     `Hizmet: ${service}`,
     `Tarih: ${date}`,
@@ -217,9 +233,9 @@ async function sendUserConfirmationEmail({ name, email, phone, service, date, me
   const origin = req?.headers?.get?.("origin") || "";
   const html = buildGlassEmailHtml({
     title: "Randevu talebinizi aldık",
-    subtitle: `Merhaba <strong style=\"color:#fff\">${escapeHtml(
+    subtitle: `Merhaba <strong style=\"color:#fff\;font-weight:600\">${escapeHtml(
       name
-    )}</strong>, talebiniz kayda alındı. En kısa sürede sizinle iletişime geçeceğiz.`,
+    )}</strong>, talebinizi aldık. Size en kısa sürede geri döneceğiz :)`,
     rows: [
       { k: "Hizmet", v: escapeHtml(service) },
       { k: "Tarih", v: escapeHtml(date) },

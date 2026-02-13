@@ -2,15 +2,14 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { Wrench, Images, PhoneCall, MessageCircle } from "lucide-react";
+import { Wrench, Images, MessageCircle, BadgeCheck } from "lucide-react";
 import { cn } from "@/lib/utils";
-import { siteConfig } from "@/lib/siteConfig";
 
 const items = [
   { href: "/services", label: "Hizmetler", Icon: Wrench },
+  { href: "/brands", label: "Markalar", Icon: BadgeCheck },
   { href: "/gallery", label: "Galeri", Icon: Images },
   { href: "/contact", label: "Randevu", Icon: MessageCircle },
-  { href: `tel:${siteConfig.phoneTel}`, label: "Ara", Icon: PhoneCall },
 ];
 
 export default function MobileNav() {

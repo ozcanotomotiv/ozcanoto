@@ -9,6 +9,11 @@ const serviceBySlug = {
     fullDesc:
       "Kaporta boyasına zarar vermeden, özel ekipman ve tekniklerle göçükleri düzeltiriz. Dolu hasarı, kapı vurukları ve küçük göçüklerde hızlı çözüm sunarız.",
   },
+  "celik-rutus": {
+    title: "Çelik Rötuş",
+    fullDesc:
+      "Küçük çizikler, taş izleri ve lokal kusurlarda hızlı rötuş çözümleri sunarız. Amaç, aracın görünümünü temizleyip gözle görülen kusurları minimuma indirmektir.",
+  },
   "periyodik-bakim": {
     title: "Periyodik Bakım",
     fullDesc:
@@ -17,7 +22,32 @@ const serviceBySlug = {
   "mekanik-onarim": {
     title: "Mekanik Onarım",
     fullDesc:
-      "Arıza tespiti, motor ve yürüyen aksam onarımları gibi mekanik ihtiyaçlarınız için doğru teşhis ve sağlam işçilikle hizmet veririz.",
+      "Periyodik bakımın dışında; motor arızaları, alt takım, yürüyen aksam ve işçilik gerektiren mekanik ihtiyaçlarınız için doğru teşhis ve sağlam işçilikle hizmet veririz.",
+  },
+  "kaporta-boya": {
+    title: "Kaporta & Boya",
+    fullDesc:
+      "Kaporta düzeltme, boya işlemleri ve hasar onarımında hem ücretli hem de sigorta üzerinden süreç yönetimi sunarız. Hasarı inceler, işlemleri planlar ve teslim öncesi kontrolleri tamamlarız.",
+  },
+  "elektrik-elektronik": {
+    title: "Elektrik & Elektronik",
+    fullDesc:
+      "Elektrik sistemleri ve elektronik arızalarda arıza tespiti, sensör/aksam kontrolleri ve onarım süreçlerini yönetiriz. En doğru çözüm için ölçüm ve testlerle ilerleriz.",
+  },
+  "estetik": {
+    title: "Estetik (Pasta Cila / Seramik / Kuaför)",
+    fullDesc:
+      "Estetik bakım paketlerimiz; pasta-cila, boya koruma, seramik kaplama ve detaylı iç/dış kuaför hizmetlerini kapsar. Aracınızın parlaklığını ve korumasını artırmak için doğru ürün ve uygulama seçimi yaparız.",
+  },
+  "vale-hizmeti": {
+    title: "Vale Hizmeti (Evden alıp teslim)",
+    fullDesc:
+      "Zamanınız kısıtlıysa aracı evinizden/iş yerinizden teslim alıp işlemler tamamlandığında tekrar teslim ederiz. Süreç boyunca bilgilendirme yaparız.",
+  },
+  "vize-hazirligi": {
+    title: "Vize Hazırlığı",
+    fullDesc:
+      "Aracınızı tamamen bize bırakın. Kontrolleri yapalım, gerekli hazırlıkları ve eksiklerin giderilmesini planlayalım. Hazır olduğunda sizi bilgilendirip teslim edelim.",
   },
 };
 

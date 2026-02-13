@@ -1,11 +1,13 @@
 import { Montserrat, Open_Sans } from "next/font/google";
 import "./globals.css";
 import { Toaster } from "sonner";
+import Image from "next/image";
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
 import MobileNav from "@/components/layout/MobileNav";
 import LocalBusinessJsonLd from "@/components/seo/LocalBusinessJsonLd";
 import CookieBanner from "@/components/seo/CookieBanner";
+import { siteConfig } from "@/lib/siteConfig";
 
 const montserrat = Montserrat({
   variable: "--font-heading",
@@ -55,6 +57,41 @@ export default function RootLayout({ children }) {
         <Footer />
         <MobileNav />
         <CookieBanner />
+        <div className="fixed bottom-24 left-5 z-50 flex flex-col gap-3 md:bottom-5">
+          <a
+            href={siteConfig.instagramUrl}
+            target="_blank"
+            rel="noreferrer"
+            aria-label="Instagram"
+            className="group grid size-14 place-items-center rounded-full border border-white/15 bg-black/65 shadow-[0_10px_30px_rgba(0,0,0,0.35)] backdrop-blur hover:bg-black/75"
+          >
+            <span className="transition-transform duration-500 ease-out group-hover:rotate-[360deg]">
+              <Image src="/icon/instagram.svg" alt="Instagram" width={28} height={28} />
+            </span>
+          </a>
+
+          <a
+            href={siteConfig.whatsappUrl}
+            target="_blank"
+            rel="noreferrer"
+            aria-label="WhatsApp"
+            className="group grid size-14 place-items-center rounded-full border border-white/15 bg-black/65 shadow-[0_10px_30px_rgba(0,0,0,0.35)] backdrop-blur hover:bg-black/75"
+          >
+            <span className="transition-transform duration-500 ease-out group-hover:rotate-[360deg]">
+              <Image src="/icon/whatsapp.svg" alt="WhatsApp" width={28} height={28} />
+            </span>
+          </a>
+
+          <a
+            href={`tel:${siteConfig.phoneTel}`}
+            aria-label="Telefon"
+            className="group grid size-14 place-items-center rounded-full border border-white/15 bg-black/65 shadow-[0_10px_30px_rgba(0,0,0,0.35)] backdrop-blur hover:bg-black/75"
+          >
+            <span className="transition-transform duration-500 ease-out group-hover:rotate-[360deg]">
+              <Image src="/icon/phone.svg" alt="Telefon" width={28} height={28} />
+            </span>
+          </a>
+        </div>
         <Toaster richColors position="bottom-right" />
       </body>
     </html>

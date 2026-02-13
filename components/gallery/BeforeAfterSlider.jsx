@@ -7,8 +7,8 @@ import { cn } from "@/lib/utils";
 export default function BeforeAfterSlider({
   beforeSrc,
   afterSrc,
-  beforeLabel = "Önce",
-  afterLabel = "Sonra",
+  beforeLabel = "Öncesi",
+  afterLabel = "Sonrası",
   className,
 }) {
   const id = useId();
@@ -52,6 +52,13 @@ export default function BeforeAfterSlider({
               {afterLabel}
             </div>
           )}
+        </div>
+
+        <div className="absolute left-3 top-3 inline-flex rounded-full bg-black/65 px-3 py-1 text-[11px] font-semibold tracking-wide text-white ring-1 ring-white/10">
+          Öncesi
+        </div>
+        <div className="absolute right-3 top-3 inline-flex rounded-full bg-black/65 px-3 py-1 text-[11px] font-semibold tracking-wide text-white ring-1 ring-white/10">
+          Sonrası
         </div>
 
         <div

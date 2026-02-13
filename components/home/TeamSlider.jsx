@@ -188,10 +188,6 @@ export default function TeamSlider() {
                     <div className="pointer-events-none absolute inset-[6px] rounded-[20px] bg-white/5 backdrop-blur" />
                     <div className="pointer-events-none absolute -left-1/2 -top-1/2 size-[200%] rotate-45 bg-gradient-to-r from-transparent via-[rgba(243,156,18,0.12)] to-transparent opacity-70 transition-transform duration-500 group-hover:translate-x-1/2" />
 
-                    <div className="absolute right-5 top-5 grid size-12 place-items-center rounded-full border border-[rgba(243,156,18,0.35)] bg-[rgba(243,156,18,0.16)] text-xl shadow-[0_10px_30px_rgba(243,156,18,0.18)]">
-                      {x.badge}
-                    </div>
-
                     <div className="relative z-10 size-[112px]">
                       <div className="team-avatar-glow" />
                       <div className="team-avatar-ring" />

@@ -10,6 +10,12 @@ const serviceOptions = [
   "Boyasız Göçük",
   "Periyodik Bakım",
   "Mekanik Onarım",
+  "Kaporta & Boya",
+  "Elektrik & Elektronik",
+  "Estetik (Pasta Cila / Seramik / Kuaför)",
+  "Çelik Rötuş",
+  "Vale Hizmeti (Aracı evden alıp teslim)",
+  "Vize Hazırlığı",
 ];
 
 export default function AppointmentForm({ variant = "full" }) {
