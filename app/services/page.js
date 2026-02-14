@@ -2,6 +2,7 @@ import Container from "@/components/ui/Container";
 import Link from "next/link";
 import { Shield } from "lucide-react";
 import ServicesGridWithModal from "@/components/services/ServicesGridWithModal";
+import { Suspense } from "react";
 
 export const metadata = {
   title: "Hizmetler",
@@ -36,7 +37,9 @@ export default function ServicesPage() {
           </Link>
         </div>
 
-        <ServicesGridWithModal />
+        <Suspense fallback={null}>
+          <ServicesGridWithModal />
+        </Suspense>
       </Container>
     </div>
   );
