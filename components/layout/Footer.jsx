@@ -5,26 +5,29 @@ import Image from "next/image";
 import { Star } from "lucide-react";
 
 async function getGoogleRatingSummary() {
-  const baseUrl =
-    process.env.NEXT_PUBLIC_SITE_URL ||
-    process.env.SITE_URL ||
-    process.env.URL ||
-    "http://localhost:3000";
+  const apiKey = process.env.GOOGLE_MAPS_API_KEY;
+  const placeId = process.env.GOOGLE_PLACE_ID;
+  if (!apiKey || !placeId) return null;
 
   try {
-    const res = await fetch(new URL("/api/google-reviews", baseUrl), {
-      next: { revalidate: 3600 },
-    });
-    const data = await res.json();
-    if (!res.ok || !data?.ok) return null;
+    const url = new URL("https://maps.googleapis.com/maps/api/place/details/json");
+    url.searchParams.set("place_id", placeId);
+    url.searchParams.set("fields", "url,rating,user_ratings_total");
+    url.searchParams.set("language", "tr");
+    url.searchParams.set("key", apiKey);
 
+    const res = await fetch(url, { next: { revalidate: 3600 } });
+    const data = await res.json();
+    if (!res.ok || data?.status !== "OK") return null;
+
+    const r = data.result || {};
     return {
-      rating: typeof data.rating === "number" ? data.rating : Number(data.rating),
+      rating: typeof r.rating === "number" ? r.rating : Number(r.rating),
       total:
-        typeof data.user_ratings_total === "number"
-          ? data.user_ratings_total
-          : Number(data.user_ratings_total),
-      url: data.place?.url || siteConfig.mapsUrl,
+        typeof r.user_ratings_total === "number"
+          ? r.user_ratings_total
+          : Number(r.user_ratings_total),
+      url: r.url || siteConfig.mapsUrl,
     };
   } catch {
     return null;

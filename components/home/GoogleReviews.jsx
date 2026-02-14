@@ -6,27 +6,37 @@ import { ExternalLink, Star } from "lucide-react";
 import Image from "next/image";
 
 async function getGoogleReviews() {
-  const baseUrl =
-    process.env.NEXT_PUBLIC_SITE_URL ||
-    process.env.SITE_URL ||
-    process.env.URL ||
-    "http://localhost:3000";
+  const apiKey = process.env.GOOGLE_MAPS_API_KEY;
+  const placeId = process.env.GOOGLE_PLACE_ID;
+  if (!apiKey || !placeId) return null;
 
-  const res = await fetch(new URL("/api/google-reviews", baseUrl), {
-    next: { revalidate: 3600 },
-  });
-  const data = await res.json();
-  if (!res.ok || !data?.ok) return null;
+  try {
+    const url = new URL("https://maps.googleapis.com/maps/api/place/details/json");
+    url.searchParams.set("place_id", placeId);
+    url.searchParams.set(
+      "fields",
+      ["name", "url", "rating", "user_ratings_total", "reviews", "formatted_address"].join(",")
+    );
+    url.searchParams.set("language", "tr");
+    url.searchParams.set("reviews_sort", "newest");
+    url.searchParams.set("key", apiKey);
 
-  const r = data;
-  return {
-    name: r.place?.name,
-    url: r.place?.url,
-    rating: r.rating,
-    user_ratings_total: r.user_ratings_total,
-    reviews: Array.isArray(r.reviews) ? r.reviews : [],
-    formatted_address: r.place?.formatted_address,
-  };
+    const res = await fetch(url, { next: { revalidate: 3600 } });
+    const data = await res.json();
+    if (!res.ok || data?.status !== "OK") return null;
+
+    const r = data.result || {};
+    return {
+      name: r.name,
+      url: r.url,
+      rating: r.rating,
+      user_ratings_total: r.user_ratings_total,
+      reviews: Array.isArray(r.reviews) ? r.reviews : [],
+      formatted_address: r.formatted_address,
+    };
+  } catch {
+    return null;
+  }
 }
 
 function StarsRow({ value }) {

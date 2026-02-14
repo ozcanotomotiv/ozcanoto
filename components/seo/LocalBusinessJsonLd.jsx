@@ -6,23 +6,27 @@ async function getAggregateRating() {
 
   if (!apiKey || !placeId) return null;
 
-  const url = new URL("https://maps.googleapis.com/maps/api/place/details/json");
-  url.searchParams.set("place_id", placeId);
-  url.searchParams.set("fields", "rating,user_ratings_total");
-  url.searchParams.set("language", "tr");
-  url.searchParams.set("key", apiKey);
+  try {
+    const url = new URL("https://maps.googleapis.com/maps/api/place/details/json");
+    url.searchParams.set("place_id", placeId);
+    url.searchParams.set("fields", "rating,user_ratings_total");
+    url.searchParams.set("language", "tr");
+    url.searchParams.set("key", apiKey);
 
-  const res = await fetch(url, { next: { revalidate: 3600 } });
-  const data = await res.json();
-  if (!res.ok || data.status !== "OK") return null;
+    const res = await fetch(url, { next: { revalidate: 3600 } });
+    const data = await res.json();
+    if (!res.ok || data.status !== "OK") return null;
 
-  const r = data.result || {};
-  if (!r.rating || !r.user_ratings_total) return null;
+    const r = data.result || {};
+    if (!r.rating || !r.user_ratings_total) return null;
 
-  return {
-    ratingValue: r.rating,
-    reviewCount: r.user_ratings_total,
-  };
+    return {
+      ratingValue: r.rating,
+      reviewCount: r.user_ratings_total,
+    };
+  } catch {
+    return null;
+  }
 }
 
 export default async function LocalBusinessJsonLd() {
