@@ -106,11 +106,33 @@ export default function ContactPage() {
                 Çalışma Saatleri
               </div>
               <div className="mt-4 grid gap-2 text-sm text-white/80">
-                <div>
-                  <span className="font-semibold text-white">{siteConfig.workingHours.week}</span>
+                <div className="grid grid-cols-[110px_1fr] items-center gap-2">
+                  <span className="font-semibold text-white">Pazartesi</span>
+                  <span className="text-white/80">{siteConfig.workingHours.monday}</span>
                 </div>
-                <div>
-                  <span className="font-semibold text-white">{siteConfig.workingHours.sunday}</span>
+                <div className="grid grid-cols-[110px_1fr] items-center gap-2">
+                  <span className="font-semibold text-white">Salı</span>
+                  <span className="text-white/80">{siteConfig.workingHours.tuesday}</span>
+                </div>
+                <div className="grid grid-cols-[110px_1fr] items-center gap-2">
+                  <span className="font-semibold text-white">Çarşamba</span>
+                  <span className="text-white/80">{siteConfig.workingHours.wednesday}</span>
+                </div>
+                <div className="grid grid-cols-[110px_1fr] items-center gap-2">
+                  <span className="font-semibold text-white">Perşembe</span>
+                  <span className="text-white/80">{siteConfig.workingHours.thursday}</span>
+                </div>
+                <div className="grid grid-cols-[110px_1fr] items-center gap-2">
+                  <span className="font-semibold text-white">Cuma</span>
+                  <span className="text-white/80">{siteConfig.workingHours.friday}</span>
+                </div>
+                <div className="grid grid-cols-[110px_1fr] items-center gap-2">
+                  <span className="font-semibold text-white">Cumartesi</span>
+                  <span className="text-white/80">{siteConfig.workingHours.saturday}</span>
+                </div>
+                <div className="grid grid-cols-[110px_1fr] items-center gap-2">
+                  <span className="font-semibold text-white">Pazar</span>
+                  <span className="text-white/80">{siteConfig.workingHours.sunday}</span>
                 </div>
               </div>
             </Card>

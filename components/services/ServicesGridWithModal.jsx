@@ -3,6 +3,7 @@
 import { useEffect, useMemo, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import {
   ArrowRight,
   BadgeCheck,
@@ -119,6 +120,9 @@ const services = [
 
 export default function ServicesGridWithModal() {
   const [activeSlug, setActiveSlug] = useState("");
+  const searchParams = useSearchParams();
+  const router = useRouter();
+  const pathname = usePathname();
 
   const activeService = useMemo(
     () => services.find((s) => s.slug === activeSlug) || null,
@@ -134,6 +138,18 @@ export default function ServicesGridWithModal() {
     window.addEventListener("keydown", onKeyDown);
     return () => window.removeEventListener("keydown", onKeyDown);
   }, [activeSlug]);
+
+  useEffect(() => {
+    const open = searchParams?.get("open") || "";
+    if (!open) return;
+    if (services.some((s) => s.slug === open)) setActiveSlug(open);
+  }, [searchParams]);
+
+  const closeModal = () => {
+    setActiveSlug("");
+    const open = searchParams?.get("open") || "";
+    if (open) router.replace(pathname);
+  };
 
   return (
     <>
@@ -187,7 +203,7 @@ export default function ServicesGridWithModal() {
           className="fixed inset-0 z-[90] grid place-items-center bg-black/70 px-4 backdrop-blur-sm"
           role="dialog"
           aria-modal="true"
-          onMouseDown={() => setActiveSlug("")}
+          onMouseDown={closeModal}
         >
           <div
             className="w-full max-w-3xl overflow-hidden rounded-2xl border border-white/10 bg-[rgba(20,27,38,0.85)] shadow-[0_18px_80px_rgba(0,0,0,0.55)] ring-1 ring-white/10"
@@ -197,7 +213,7 @@ export default function ServicesGridWithModal() {
               <button
                 type="button"
                 aria-label="Kapat"
-                onClick={() => setActiveSlug("")}
+                onClick={closeModal}
                 className="absolute right-4 top-4 grid size-10 place-items-center rounded-full border border-white/10 bg-black/30 text-white/80 hover:bg-black/40"
               >
                 <X size={18} />

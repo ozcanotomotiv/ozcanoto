@@ -2,8 +2,68 @@ import Link from "next/link";
 import Container from "@/components/ui/Container";
 import { siteConfig } from "@/lib/siteConfig";
 import Image from "next/image";
+import { Star } from "lucide-react";
 
-export default function Footer() {
+async function getGoogleRatingSummary() {
+  const baseUrl =
+    process.env.NEXT_PUBLIC_SITE_URL ||
+    process.env.SITE_URL ||
+    process.env.URL ||
+    "http://localhost:3000";
+
+  try {
+    const res = await fetch(new URL("/api/google-reviews", baseUrl), {
+      next: { revalidate: 3600 },
+    });
+    const data = await res.json();
+    if (!res.ok || !data?.ok) return null;
+
+    return {
+      rating: typeof data.rating === "number" ? data.rating : Number(data.rating),
+      total:
+        typeof data.user_ratings_total === "number"
+          ? data.user_ratings_total
+          : Number(data.user_ratings_total),
+      url: data.place?.url || siteConfig.mapsUrl,
+    };
+  } catch {
+    return null;
+  }
+}
+
+function StarsRow({ value }) {
+  const rounded = Math.round((Number(value) || 0) * 2) / 2;
+  const full = Math.floor(rounded);
+  const half = rounded - full >= 0.5;
+
+  return (
+    <div className="inline-flex items-center gap-1">
+      {Array.from({ length: 5 }).map((_, i) => {
+        const filled = i < full;
+        const isHalf = !filled && half && i === full;
+
+        return (
+          <span key={i} className="relative">
+            <Star
+              size={14}
+              className={filled ? "text-accent" : "text-white/25"}
+              fill={filled ? "currentColor" : "none"}
+            />
+            {isHalf ? (
+              <span className="absolute inset-0 overflow-hidden" style={{ width: "50%" }}>
+                <Star size={14} className="text-accent" fill="currentColor" />
+              </span>
+            ) : null}
+          </span>
+        );
+      })}
+    </div>
+  );
+}
+
+export default async function Footer() {
+  const google = await getGoogleRatingSummary();
+
   return (
     <footer className="border-t border-white/10 bg-black">
       <Container className="py-10">
@@ -27,6 +87,20 @@ export default function Footer() {
                   {siteConfig.city}'de 1999'dan beri boyasız göçük onarımı,
                   periyodik bakım ve mekanik onarım.
                 </div>
+                {google?.rating && google?.total ? (
+                  <a
+                    className="mt-3 inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-3 py-1.5 text-xs font-semibold text-white/80 hover:bg-white/10"
+                    href={google.url}
+                    target="_blank"
+                    rel="noreferrer"
+                    aria-label="Google yorumları"
+                  >
+                    <span className="text-white/70">Google</span>
+                    <StarsRow value={google.rating} />
+                    <span className="text-white">{google.rating?.toFixed?.(1) ?? google.rating}/5</span>
+                    <span className="text-white/60">({google.total} yorum)</span>
+                  </a>
+                ) : null}
               </div>
             </div>
           </div>
@@ -87,8 +161,20 @@ export default function Footer() {
         <div className="mt-10 grid gap-2 rounded-[var(--radius-md)] border border-white/10 bg-white/5 p-5 text-sm text-white/80 md:grid-cols-2">
           <div>
             <div className="font-[var(--font-heading)] text-white">Çalışma Saatleri</div>
-            <div className="mt-1 text-white/70">{siteConfig.workingHours.week}</div>
-            <div className="text-white/70">{siteConfig.workingHours.sunday}</div>
+            <div className="mt-3 grid gap-2 text-white/70">
+              <div className="grid grid-cols-[110px_1fr] items-center gap-2">
+                <span className="font-semibold text-white">Pzt–Cum</span>
+                <span>{siteConfig.workingHours.monday}</span>
+              </div>
+              <div className="grid grid-cols-[110px_1fr] items-center gap-2">
+                <span className="font-semibold text-white">Cumartesi</span>
+                <span>{siteConfig.workingHours.saturday}</span>
+              </div>
+              <div className="grid grid-cols-[110px_1fr] items-center gap-2">
+                <span className="font-semibold text-white">Pazar</span>
+                <span>{siteConfig.workingHours.sunday}</span>
+              </div>
+            </div>
           </div>
           <div className="md:text-right">
             <div className="font-[var(--font-heading)] text-white">Hızlı İletişim</div>

@@ -6,6 +6,7 @@ import TeamSlider from "@/components/home/TeamSlider";
 import Process from "@/components/home/Process";
 import Coverage from "@/components/home/Coverage";
 import FaqPreview from "@/components/home/FaqPreview";
+import GoogleReviews from "@/components/home/GoogleReviews";
 import Container from "@/components/ui/Container";
 import Button from "@/components/ui/Button";
 import Link from "next/link";
@@ -35,6 +36,8 @@ export default function Home() {
       <Reveal from="left" distance={26} delayMs={200} once={false}>
         <FaqPreview />
       </Reveal>
+
+      <GoogleReviews />
 
       <section>
         <Container className="py-14">

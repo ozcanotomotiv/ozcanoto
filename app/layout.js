@@ -61,7 +61,7 @@ export default function RootLayout({ children }) {
         <Footer />
         <MobileNav />
         <CookieBanner />
-        <div className="fixed bottom-24 left-5 z-50 flex flex-col gap-3 md:bottom-5">
+        <div className="fixed bottom-24 right-5 z-50 flex flex-col gap-3 md:bottom-5">
           <a
             href={siteConfig.instagramUrl}
             target="_blank"

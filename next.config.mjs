@@ -5,6 +5,15 @@ import { fileURLToPath } from "node:url";
 const nextConfig = {
   /* config options here */
   reactCompiler: true,
+  images: {
+    remotePatterns: [
+      {
+        protocol: "https",
+        hostname: "lh3.googleusercontent.com",
+        pathname: "/**",
+      },
+    ],
+  },
   turbopack: {
     root: path.dirname(fileURLToPath(import.meta.url)),
   },

@@ -1,92 +1,77 @@
 "use client";
 
 import { useEffect, useMemo, useRef, useState } from "react";
-import Image from "next/image";
 import Container from "@/components/ui/Container";
 
 const team = [
   {
     name: "Fatih ÖZCAN",
     role: "Kurucu",
-    src: "/images/images3.jpg",
     badge: "⭐",
   },
   {
     name: "Yağmur ŞENTÜRK",
     role: "Genel Müdür",
-    src: "/images/images1.jpg",
     badge: "📋",
   },
   {
     name: "Ramazan CANIVAR",
     role: "Hasar & Sigorta Sorumlusu",
-    src: "/images/images2.jpg",
     badge: "🧾",
   },
   {
     name: "Fatih ORHAN",
     role: "Boyasız Göçük Uzmanı",
-    src: "/images/images4.jpg",
     badge: "🛠️",
   },
   {
     name: "Tayfun ÇELİK",
     role: "Oto Boya Ustası",
-    src: "/images/images3.jpg",
     badge: "🎨",
   },
   {
     name: "Süleyman KAVAL",
     role: "Oto Boya Ustası",
-    src: "/images/images1.jpg",
     badge: "🎨",
   },
   {
     name: "Hüseyin YEŞİLTAŞ",
     role: "Mekanik Ustası",
-    src: "/images/images2.jpg",
     badge: "🔧",
   },
   {
     name: "Batuhan SAY",
     role: "Mekanik Ustası",
-    src: "/images/images4.jpg",
     badge: "🔧",
   },
   {
     name: "Erhan YILDIRIM",
     role: "Kaporta Ustası",
-    src: "/images/images3.jpg",
     badge: "🚗",
   },
   {
     name: "Mahmut Kadir YAMUÇ",
     role: "Kaporta Ustası",
-    src: "/images/images1.jpg",
     badge: "🚗",
   },
   {
     name: "Volkan GÜLTAŞ",
     role: "Estetik Uzmanı",
-    src: "/images/images2.jpg",
     badge: "✨",
   },
   {
     name: "Halil ÇUBUK",
     role: "Elektrik & Elektronik Ustası",
-    src: "/images/images4.jpg",
     badge: "⚡",
   },
   {
     name: "Mehmet DUKAN",
     role: "Elektrik Ustası",
-    src: "/images/images3.jpg",
     badge: "⚡",
   },
   {
     name: "Kadriye ULUCAN",
     role: "Aşçı",
-    src: "/images/images1.jpg",
     badge: "🍽️",
   },
 ];
@@ -188,25 +173,9 @@ export default function TeamSlider() {
                     <div className="pointer-events-none absolute inset-[6px] rounded-[20px] bg-white/5 backdrop-blur" />
                     <div className="pointer-events-none absolute -left-1/2 -top-1/2 size-[200%] rotate-45 bg-gradient-to-r from-transparent via-[rgba(243,156,18,0.12)] to-transparent opacity-70 transition-transform duration-500 group-hover:translate-x-1/2" />
 
-                    <div className="relative z-10 size-[112px]">
-                      <div className="team-avatar-glow" />
-                      <div className="team-avatar-ring" />
-                      <div className="relative size-full overflow-hidden rounded-full ring-1 ring-white/10">
-                        <Image
-                          src={x.src}
-                          alt={x.name}
-                          fill
-                          sizes="112px"
-                          className="object-cover"
-                        />
-                      </div>
-                    </div>
-
-                    <div className="relative z-10 text-center">
-                      <div className="text-lg font-[var(--font-heading)]">
-                        {x.name}
-                      </div>
-                      <div className="mt-2 inline-flex rounded-full border border-[rgba(243,156,18,0.30)] bg-[rgba(243,156,18,0.10)] px-4 py-2 text-sm font-semibold text-accent">
+                    <div className="relative z-10 flex min-h-[180px] flex-col items-center justify-center text-center">
+                      <div className="text-lg font-[var(--font-heading)]">{x.name}</div>
+                      <div className="mt-3 inline-flex rounded-full border border-[rgba(243,156,18,0.30)] bg-[rgba(243,156,18,0.10)] px-4 py-2 text-sm font-semibold text-accent">
                         {x.role}
                       </div>
                     </div>

@@ -44,7 +44,7 @@ export default function Services() {
 
         <div className="mt-8 grid gap-6 md:grid-cols-3">
           {items.map((x) => (
-            <Link key={x.slug} href={`/services/${x.slug}`}>
+            <Link key={x.slug} href={`/services?open=${x.slug}`}>
               <Card className="group h-full p-0 overflow-hidden !border-white/10 !bg-black/50 !text-white !ring-white/10 transition-transform duration-300 ease-in-out hover:-translate-y-1">
                 <div className="h-1.5 bg-gradient-to-r from-accent via-amber-400 to-accent" />
                 <div className="p-6">
