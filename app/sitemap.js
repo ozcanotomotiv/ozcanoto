@@ -11,6 +11,18 @@ export default function sitemap() {
       priority: 1,
     },
     {
+      url: `${baseUrl}/denizli-boyasiz-gocuk-onarimi`,
+      lastModified: new Date(),
+      changeFrequency: "monthly",
+      priority: 0.95,
+    },
+    {
+      url: `${baseUrl}/denizli-kaporta-boya`,
+      lastModified: new Date(),
+      changeFrequency: "monthly",
+      priority: 0.9,
+    },
+    {
       url: `${baseUrl}/services`,
       lastModified: new Date(),
       changeFrequency: "monthly",

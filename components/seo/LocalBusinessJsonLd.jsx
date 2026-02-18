@@ -30,7 +30,9 @@ async function getAggregateRating() {
 }
 
 export default async function LocalBusinessJsonLd() {
-  const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000";
+  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL;
+  const vercelUrl = process.env.VERCEL_URL;
+  const baseUrl = siteUrl || (vercelUrl ? `https://${vercelUrl}` : "http://localhost:3000");
   const aggregateRating = await getAggregateRating();
 
   const jsonLd = {

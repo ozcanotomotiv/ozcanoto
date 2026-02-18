@@ -27,11 +27,14 @@ export const metadata = {
       (process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}` : "http://localhost:3000")
   ),
   title: {
-    default: "Özcan Oto Servis | Boyasız Göçük Merkezi (1999'dan beri)",
-    template: "%s | Özcan Oto Servis",
+    default: "Özcan Otomotiv | Göçük Onarım Merkezi (1999'dan beri)",
+    template: "%s | Özcan Otomotiv",
   },
   description:
-    "İzmir'de 1999'dan beri boyasız göçük onarımı, periyodik bakım ve mekanik onarım. Hemen arayın, hızlı randevu alın.",
+    "Denizli'de 1999'dan beri boyasız göçük onarımı, kaporta & boya, mekanik ve araç bakım hizmetleri. Hemen arayın, hızlı randevu alın.",
+  alternates: {
+    canonical: "/",
+  },
   icons: {
     icon: "/logo/logo.jpg",
     apple: "/logo/logo.jpg",
@@ -39,14 +42,15 @@ export const metadata = {
   openGraph: {
     type: "website",
     locale: "tr_TR",
-    title: "Özcan Oto Servis | Boyasız Göçük Merkezi (1999'dan beri)",
+    url: "/",
+    title: "Özcan Otomotiv | Göçük Onarım Merkezi (1999'dan beri)",
     description:
-      "İzmir'de 1999'dan beri boyasız göçük onarımı, periyodik bakım ve mekanik onarım.",
-    siteName: "Özcan Oto Servis",
+      "Denizli'de 1999'dan beri boyasız göçük onarımı, kaporta & boya, mekanik ve araç bakım hizmetleri.",
+    siteName: "Özcan Otomotiv",
   },
   twitter: {
     card: "summary_large_image",
-    title: "Özcan Oto Servis",
+    title: "Özcan Otomotiv",
     description:
       "Boyasız göçük onarımı, periyodik bakım ve mekanik onarım. Hemen arayın.",
   },
