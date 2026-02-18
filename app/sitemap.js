@@ -1,5 +1,7 @@
 export default function sitemap() {
-  const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000";
+  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL;
+  const vercelUrl = process.env.VERCEL_URL;
+  const baseUrl = siteUrl || (vercelUrl ? `https://${vercelUrl}` : "http://localhost:3000");
 
   return [
     {
