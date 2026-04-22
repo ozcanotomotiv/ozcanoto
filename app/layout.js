@@ -1,6 +1,7 @@
 import { Montserrat, Open_Sans } from "next/font/google";
 import "./globals.css";
 import NextTopLoader from "nextjs-toploader";
+import PageLoader from "@/components/ui/PageLoader";
 import { Toaster } from "sonner";
 import Image from "next/image";
 import Header from "@/components/layout/Header";
@@ -99,6 +100,7 @@ export default function RootLayout({ children }) {
           easing="ease"
           speed={200}
         />
+        <PageLoader />
         <LocalBusinessJsonLd />
         <Header />
         <main className="min-h-[calc(100dvh-4rem)] pb-20 pt-22 md:pb-0">{children}</main>
