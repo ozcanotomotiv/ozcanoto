@@ -1,12 +1,21 @@
 import Container from "@/components/ui/Container";
 import Button from "@/components/ui/Button";
 import Link from "next/link";
+import FAQSchema from "@/components/seo/FAQSchema";
 import { siteConfig } from "@/lib/siteConfig";
 
 export const metadata = {
   title: "Denizli Kaporta & Boya",
   description:
     "Denizli'de kaporta düzeltme ve boya işlemleri. Hasar onarımında temiz işçilik ve hızlı randevu için Özcan Otomotiv ile iletişime geçin.",
+  keywords: [
+    "kaporta boya denizli",
+    "sigorta hasarı onarımı denizli",
+    "fırın boya denizli",
+    "araç boyama denizli",
+    "kaporta düzeltme denizli",
+    "özcan otomotiv",
+  ],
   alternates: {
     canonical: "/denizli-kaporta-boya",
   },
@@ -19,8 +28,28 @@ export const metadata = {
 };
 
 export default function DenizliKaportaBoyaPage() {
+  const faqs = [
+    {
+      q: "Sigorta ile çalışıyor musunuz?",
+      a: "Evet, tüm sigorta şirketleri ile anlaşmalıyız. Ekspertiz sürecini yönetiyoruz.",
+    },
+    {
+      q: "Boya garantisi var mı?",
+      a: "Evet, boyamaya 2 yıl garanti veriyoruz. Kaliteli malzeme ve fırın boya sistemi kullanıyoruz.",
+    },
+    {
+      q: "Ne kadar sürer?",
+      a: "Hasarın büyüklüğüne göre değişir. Küçük işlemler 2-3 gün, büyük hasarlar 1-2 hafta sürebilir.",
+    },
+    {
+      q: "Renk uyumu nasıl sağlanır?",
+      a: "Bilgisayarlı renk eşleme sistemi ile aracınızın orijinal rengini bulup uyguluyoruz.",
+    },
+  ];
+
   return (
     <div>
+      <FAQSchema faqs={faqs} />
       <section>
         <Container className="py-14 md:py-16">
           <div className="mx-auto max-w-3xl">

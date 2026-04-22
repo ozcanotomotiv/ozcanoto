@@ -4,119 +4,22 @@ import { useEffect, useMemo, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
+import { servicesData } from "@/lib/serviceData";
 import {
   ArrowRight,
-  BadgeCheck,
-  Car,
-  ClipboardCheck,
-  Paintbrush,
-  Sparkles,
   Tag,
-  Truck,
-  Wrench,
   X,
-  Zap,
 } from "lucide-react";
 
-const services = [
-  {
-    slug: "boyasiz-gocuk",
-    title: "Boyasız Göçük Onarımı",
-    shortDesc: "Dolu hasarı, kapı vurukları ve küçük göçüklerde boya koruyarak onarım.",
-    fullDesc:
-      "Kaporta boyasına zarar vermeden, özel ekipman ve tekniklerle göçükleri düzeltiriz. Dolu hasarı, kapı vurukları ve küçük göçüklerde hızlı çözüm sunarız.",
-    priceRange: "Ücret: Araca göre",
-    Icon: Car,
-    image: "/images/images2.jpg",
-  },
-  {
-    slug: "celik-rutus",
-    title: "Çelik Rötuş",
-    shortDesc:
-      "Küçük çizik ve lokal kusurlarda hızlı rötuş çözümleriyle temiz görünüm.",
-    fullDesc:
-      "Küçük çizikler, taş izleri ve lokal kusurlarda hızlı rötuş çözümleri sunarız. Amaç, aracın görünümünü temizleyip gözle görülen kusurları minimuma indirmektir.",
-    priceRange: "Ücret: İşe göre",
-    Icon: Tag,
-    image: "/images/images1.jpg",
-  },
-  {
-    slug: "periyodik-bakim",
-    title: "Periyodik Bakım",
-    shortDesc: "Yağ, filtre, fren ve genel kontrol ile güvenli sürüş.",
-    fullDesc:
-      "Yağ ve filtre değişimi, fren kontrolleri ve genel muayene ile aracınızın performansını koruruz. Güvenli sürüş için düzenli bakım planları sunarız.",
-    priceRange: "Ücret: Pakete göre",
-    Icon: BadgeCheck,
-    image: "/images/images3.jpg",
-  },
-  {
-    slug: "mekanik-onarim",
-    title: "Mekanik Onarım",
-    shortDesc:
-      "Motor arızaları, alt takım, yürüyen aksam ve kapsamlı işçilik çözümleri.",
-    fullDesc:
-      "Periyodik bakımın dışında; motor arızaları, alt takım, yürüyen aksam ve işçilik gerektiren mekanik ihtiyaçlarınız için doğru teşhis ve sağlam işçilikle hizmet veririz.",
-    priceRange: "Ücret: Tespitten sonra",
-    Icon: Wrench,
-    image: "/images/images4.jpg",
-  },
-  {
-    slug: "kaporta-boya",
-    title: "Kaporta & Boya",
-    shortDesc:
-      "Sigorta hasarı ve ücretli işlemler: kaporta düzeltme, boya ve onarım süreçleri.",
-    fullDesc:
-      "Kaporta düzeltme, boya işlemleri ve hasar onarımında hem ücretli hem de sigorta üzerinden süreç yönetimi sunarız. Hasarı inceler, işlemleri planlar ve teslim öncesi kontrolleri tamamlarız.",
-    priceRange: "Ücret: Hasara göre",
-    Icon: Paintbrush,
-    image: "/images/images2.jpg",
-  },
-  {
-    slug: "elektrik-elektronik",
-    title: "Elektrik & Elektronik",
-    shortDesc:
-      "Arıza tespiti, elektrik sistemleri, sensör/aksam kontrolleri ve onarımlar.",
-    fullDesc:
-      "Elektrik sistemleri ve elektronik arızalarda arıza tespiti, sensör/aksam kontrolleri ve onarım süreçlerini yönetiriz. En doğru çözüm için ölçüm ve testlerle ilerleriz.",
-    priceRange: "Ücret: Tespitten sonra",
-    Icon: Zap,
-    image: "/images/images3.jpg",
-  },
-  {
-    slug: "estetik",
-    title: "Estetik (Pasta Cila / Seramik / Kuaför)",
-    shortDesc:
-      "Pasta-cila, boya koruma, seramik kaplama ve detaylı iç/dış temizlik paketleri.",
-    fullDesc:
-      "Estetik bakım paketlerimiz; pasta-cila, boya koruma, seramik kaplama ve detaylı iç/dış kuaför hizmetlerini kapsar. Aracınızın parlaklığını ve korumasını artırmak için doğru ürün ve uygulama seçimi yaparız.",
-    priceRange: "Ücret: Pakete göre",
-    Icon: Sparkles,
-    image: "/images/images4.jpg",
-  },
-  {
-    slug: "vale-hizmeti",
-    title: "Vale Hizmeti (Evden alıp teslim)",
-    shortDesc:
-      "Aracınızı evden alıyor, işlemler sonrası güvenle teslim ediyoruz.",
-    fullDesc:
-      "Zamanınız kısıtlıysa aracı evinizden/iş yerinizden teslim alıp işlemler tamamlandığında tekrar teslim ederiz. Süreç boyunca bilgilendirme yaparız.",
-    priceRange: "Ücret: Mesafeye göre",
-    Icon: Truck,
-    image: "/images/images1.jpg",
-  },
-  {
-    slug: "vize-hazirligi",
-    title: "Vize Hazırlığı",
-    shortDesc:
-      "Aracınızı tamamen bize bırakın: kontrol, eksiklerin tamamlanması ve hazırlık.",
-    fullDesc:
-      "Aracınızı tamamen bize bırakın. Kontrolleri yapalım, gerekli hazırlıkları ve eksiklerin giderilmesini planlayalım. Hazır olduğunda sizi bilgilendirip teslim edelim.",
-    priceRange: "Ücret: Araca göre",
-    Icon: ClipboardCheck,
-    image: "/images/images2.jpg",
-  },
-];
+const services = Object.entries(servicesData).map(([slug, data]) => ({
+  slug,
+  title: data.title,
+  shortDesc: data.shortDesc,
+  fullDesc: data.fullDesc,
+  Icon: data.Icon,
+  image: "/images/images2.jpg",
+  priceRange: "Ücret: Araca göre",
+}));
 
 export default function ServicesGridWithModal() {
   const [activeSlug, setActiveSlug] = useState("");

@@ -5,12 +5,32 @@ import Image from "next/image";
 import fs from "node:fs/promises";
 import path from "node:path";
 
+const pairMeta = {
+  "1": { title: "Boyasız Göçük Onarımı" },
+  "2": { title: "Boyasız Göçük Onarımı" },
+  "3": { title: "Boyasız Göçük Onarımı" },
+  "4": { title: "Boyasız Göçük Onarımı" },
+  "5": { title: "Boyasız Göçük Onarımı" },
+  "6": { title: "Boyasız Göçük Onarımı" },
+  "7": { title: "Far Temizliği" },
+  "8": { title: "Boyasız Göçük Onarımı" },
+  "9": { title: "Boyasız Göçük Onarımı" },
+};
+
 function parseBeforeAfterPairs(fileNames) {
   const map = new Map();
 
   const getKey = (rawName) => {
     const name = rawName.replace(/\.[^/.]+$/, "");
     const lower = name.toLowerCase();
+
+    const numericMatch = name.match(/^(.*?)-(1|2)$/);
+    if (numericMatch) {
+      return {
+        key: numericMatch[1].trim(),
+        type: numericMatch[2] === "1" ? "before" : "after",
+      };
+    }
 
     if (lower.includes("öncesi")) {
       return {
@@ -40,7 +60,7 @@ function parseBeforeAfterPairs(fileNames) {
 
   return Array.from(map.entries())
     .map(([key, v]) => ({
-      title: v.title || key,
+      title: pairMeta[key]?.title || v.title || key,
       beforeSrc: v.before ? `/before-after/${encodeURIComponent(v.before)}` : null,
       afterSrc: v.after ? `/before-after/${encodeURIComponent(v.after)}` : null,
     }))

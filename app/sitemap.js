@@ -3,6 +3,18 @@ export default function sitemap() {
   const vercelUrl = process.env.VERCEL_URL;
   const baseUrl = siteUrl || (vercelUrl ? `https://${vercelUrl}` : "http://localhost:3000");
 
+  const servicePages = [
+    "boyasiz-gocuk",
+    "celik-rutus",
+    "periyodik-bakim",
+    "mekanik-onarim",
+    "kaporta-boya",
+    "elektrik-elektronik",
+    "estetik",
+    "vale-hizmeti",
+    "vize-hazirligi",
+  ];
+
   return [
     {
       url: `${baseUrl}/`,
@@ -28,10 +40,16 @@ export default function sitemap() {
       changeFrequency: "monthly",
       priority: 0.8,
     },
+    ...servicePages.map((slug) => ({
+      url: `${baseUrl}/services/${slug}`,
+      lastModified: new Date(),
+      changeFrequency: "monthly",
+      priority: 0.75,
+    })),
     {
       url: `${baseUrl}/gallery`,
       lastModified: new Date(),
-      changeFrequency: "monthly",
+      changeFrequency: "weekly",
       priority: 0.7,
     },
     {

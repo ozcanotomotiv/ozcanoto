@@ -2,6 +2,7 @@ import Container from "@/components/ui/Container";
 import Link from "next/link";
 import { Shield } from "lucide-react";
 import ServicesGridWithModal from "@/components/services/ServicesGridWithModal";
+import ServiceBenefits from "@/components/services/ServiceBenefits";
 import { Suspense } from "react";
 
 export const metadata = {
@@ -41,6 +42,8 @@ export default function ServicesPage() {
           <ServicesGridWithModal />
         </Suspense>
       </Container>
+
+      <ServiceBenefits />
     </div>
   );
 }

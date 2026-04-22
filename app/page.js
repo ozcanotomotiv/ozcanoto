@@ -7,6 +7,10 @@ import Process from "@/components/home/Process";
 import Coverage from "@/components/home/Coverage";
 import FaqPreview from "@/components/home/FaqPreview";
 import GoogleReviews from "@/components/home/GoogleReviews";
+import TrustBadges from "@/components/home/TrustBadges";
+import QuickStats from "@/components/home/QuickStats";
+import DetailedServices from "@/components/home/DetailedServices";
+import WhyChooseUs from "@/components/home/WhyChooseUs";
 import Container from "@/components/ui/Container";
 import Button from "@/components/ui/Button";
 import Link from "next/link";
@@ -17,17 +21,25 @@ export default function Home() {
   return (
     <div>
       <Hero />
+      <TrustBadges />
       <Reveal from="left" distance={26} once={false}>
         <Services />
       </Reveal>
+      <QuickStats />
       <Reveal from="right" distance={26} delayMs={80} once={false}>
         <WhyUs />
+      </Reveal>
+      <Reveal from="left" distance={26} delayMs={100} once={false}>
+        <DetailedServices />
       </Reveal>
       <Reveal from="left" distance={26} delayMs={120} once={false}>
         <TeamSlider />
       </Reveal>
       <Reveal from="right" distance={26} delayMs={140} once={false}>
         <Process />
+      </Reveal>
+      <Reveal from="left" distance={26} delayMs={150} once={false}>
+        <WhyChooseUs />
       </Reveal>
       <Reveal from="left" distance={26} delayMs={160} once={false}>
         <Coverage />

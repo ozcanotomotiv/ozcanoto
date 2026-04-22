@@ -1,6 +1,8 @@
 import Container from "@/components/ui/Container";
 import Card from "@/components/ui/Card";
 import AppointmentForm from "@/components/forms/AppointmentForm";
+import QuickInfo from "@/components/contact/QuickInfo";
+import ContactFAQ from "@/components/contact/ContactFAQ";
 import { siteConfig } from "@/lib/siteConfig";
 
 export const metadata = {
@@ -23,8 +25,12 @@ export default function ContactPage() {
             İletişim
           </h1>
           <p className="mt-2 text-sm text-white/80 md:text-base">
-            Hızlı randevu için arayın veya formu doldurun.
+            Hızlı randevu için arayın veya formu doldurun. Aynı gün dönüş garantisi.
           </p>
+        </div>
+
+        <div className="mt-8">
+          <QuickInfo />
         </div>
 
         <div className="mt-8 grid gap-6 md:grid-cols-2">
@@ -137,6 +143,10 @@ export default function ContactPage() {
               </div>
             </Card>
           </div>
+        </div>
+
+        <div className="mt-8">
+          <ContactFAQ />
         </div>
       </Container>
     </div>

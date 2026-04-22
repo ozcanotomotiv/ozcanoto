@@ -1,12 +1,21 @@
 import Container from "@/components/ui/Container";
 import Button from "@/components/ui/Button";
 import Link from "next/link";
+import FAQSchema from "@/components/seo/FAQSchema";
 import { siteConfig } from "@/lib/siteConfig";
 
 export const metadata = {
   title: "Denizli Boyasız Göçük Onarımı (PDR)",
   description:
     "Denizli'de boyasız göçük onarımı (PDR), dolu hasarı ve kapı vuruklarında hızlı çözüm. Özcan Otomotiv ile iletişime geçin.",
+  keywords: [
+    "boyasız göçük onarımı denizli",
+    "dolu hasarı onarımı denizli",
+    "kapı vurukları onarımı",
+    "pdr denizli",
+    "göçük düzeltme denizli",
+    "özcan otomotiv",
+  ],
   alternates: {
     canonical: "/denizli-boyasiz-gocuk-onarimi",
   },
@@ -14,13 +23,41 @@ export const metadata = {
     title: "Denizli Boyasız Göçük Onarımı (PDR) | Özcan Otomotiv",
     description:
       "Denizli'de boyasız göçük onarımı (PDR), dolu hasarı ve kapı vuruklarında hızlı çözüm. Hemen randevu alın.",
+    images: [
+      {
+        url: "/logo/logo.jpg",
+        width: 1200,
+        height: 630,
+        alt: "Denizli Boyasız Göçük Onarımı",
+      },
+    ],
     url: "/denizli-boyasiz-gocuk-onarimi",
   },
 };
 
 export default function DenizliBoyasizGocukOnarimiPage() {
+  const faqs = [
+    {
+      q: "Boyasız göçük onarımı nedir?",
+      a: "Kaporta boyasına işlem yapmadan, göçüğü içten/dıştan özel aletlerle düzelterek orijinal boyayı koruyan onarım yöntemidir.",
+    },
+    {
+      q: "Dolu hasarı PDR ile olur mu?",
+      a: "Hasarın konumuna ve boya durumuna göre çoğu dolu hasarı PDR ile toparlanabilir. Net bilgi için fotoğrafla hızlı değerlendirme yapılır.",
+    },
+    {
+      q: "Ne kadar sürer?",
+      a: "Göçüğün sayısı ve büyüklüğüne göre değişir. Bazı işlemler aynı gün, dolu hasarı gibi yoğun işlerde ise birkaç gün sürebilir.",
+    },
+    {
+      q: "Fiyat nasıl belirlenir?",
+      a: "Panel sayısı, göçüğün derinliği ve erişim zorluğuna göre belirlenir. Fotoğraf veya yerinde kontrol ile netleşir.",
+    },
+  ];
+
   return (
     <div>
+      <FAQSchema faqs={faqs} />
       <section>
         <Container className="py-14 md:py-16">
           <div className="mx-auto max-w-3xl">

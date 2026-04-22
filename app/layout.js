@@ -1,5 +1,6 @@
 import { Montserrat, Open_Sans } from "next/font/google";
 import "./globals.css";
+import NextTopLoader from "nextjs-toploader";
 import { Toaster } from "sonner";
 import Image from "next/image";
 import Header from "@/components/layout/Header";
@@ -21,6 +22,13 @@ const openSans = Open_Sans({
   weight: ["400", "600"],
 });
 
+export const viewport = {
+  width: "device-width",
+  initialScale: 1,
+  maximumScale: 5,
+  themeColor: "#0b0f14",
+};
+
 export const metadata = {
   metadataBase: new URL(
     process.env.NEXT_PUBLIC_SITE_URL ||
@@ -32,6 +40,16 @@ export const metadata = {
   },
   description:
     "Denizli'de 1999'dan beri boyasız göçük onarımı, kaporta & boya, mekanik ve araç bakım hizmetleri. Hemen arayın, hızlı randevu alın.",
+  keywords: [
+    "boyasız göçük onarımı denizli",
+    "kaporta boya denizli",
+    "oto servis denizli",
+    "araç bakım denizli",
+    "mekanik onarım denizli",
+    "özcan otomotiv",
+    "dolu hasarı onarımı",
+    "periyodik bakım denizli",
+  ],
   alternates: {
     canonical: "/",
   },
@@ -47,12 +65,24 @@ export const metadata = {
     description:
       "Denizli'de 1999'dan beri boyasız göçük onarımı, kaporta & boya, mekanik ve araç bakım hizmetleri.",
     siteName: "Özcan Otomotiv",
+    images: [
+      {
+        url: "/logo/logo.jpg",
+        width: 1200,
+        height: 630,
+        alt: "Özcan Otomotiv - Denizli Oto Servis",
+      },
+    ],
   },
   twitter: {
     card: "summary_large_image",
     title: "Özcan Otomotiv",
     description:
       "Boyasız göçük onarımı, periyodik bakım ve mekanik onarım. Hemen arayın.",
+    images: ["/logo/logo.jpg"],
+  },
+  verification: {
+    google: process.env.GOOGLE_SITE_VERIFICATION,
   },
 };
 
@@ -62,6 +92,13 @@ export default function RootLayout({ children }) {
       <body
         className={`${montserrat.variable} ${openSans.variable} min-h-dvh bg-brand text-brand-foreground antialiased`}
       >
+        <NextTopLoader
+          color="#f39c12"
+          height={3}
+          showSpinner={false}
+          easing="ease"
+          speed={200}
+        />
         <LocalBusinessJsonLd />
         <Header />
         <main className="min-h-[calc(100dvh-4rem)] pb-20 pt-22 md:pb-0">{children}</main>

@@ -1,5 +1,6 @@
 import Container from "@/components/ui/Container";
 import GalleryGrid from "@/components/gallery/GalleryGrid";
+import GalleryIntro from "@/components/gallery/GalleryIntro";
 import fs from "node:fs/promises";
 import path from "node:path";
 
@@ -8,12 +9,32 @@ export const metadata = {
   description: "Öncesi/Sonrası örnek işler ve uygulamalar.",
 };
 
+const pairMeta = {
+  "1": { title: "Boyasız Göçük Onarımı", category: "boyasiz-gocuk" },
+  "2": { title: "Boyasız Göçük Onarımı", category: "boyasiz-gocuk" },
+  "3": { title: "Boyasız Göçük Onarımı", category: "boyasiz-gocuk" },
+  "4": { title: "Boyasız Göçük Onarımı", category: "boyasiz-gocuk" },
+  "5": { title: "Boyasız Göçük Onarımı", category: "boyasiz-gocuk" },
+  "6": { title: "Boyasız Göçük Onarımı", category: "boyasiz-gocuk" },
+  "7": { title: "Far Temizliği", category: "onarim" },
+  "8": { title: "Boyasız Göçük Onarımı", category: "boyasiz-gocuk" },
+  "9": { title: "Boyasız Göçük Onarımı", category: "boyasiz-gocuk" },
+};
+
 function parseBeforeAfterPairs(fileNames) {
   const map = new Map();
 
   const getKey = (rawName) => {
     const name = rawName.replace(/\.[^/.]+$/, "");
     const lower = name.toLowerCase();
+
+    const numericMatch = name.match(/^(.*?)-(1|2)$/);
+    if (numericMatch) {
+      return {
+        key: numericMatch[1].trim(),
+        type: numericMatch[2] === "1" ? "before" : "after",
+      };
+    }
 
     if (lower.includes("öncesi")) {
       return {
@@ -44,8 +65,8 @@ function parseBeforeAfterPairs(fileNames) {
   return Array.from(map.entries())
     .map(([key, v], idx) => ({
       id: String(idx + 1),
-      category: "boyasiz-gocuk",
-      title: v.title || key,
+      category: pairMeta[key]?.category || "boyasiz-gocuk",
+      title: pairMeta[key]?.title || v.title || key,
       beforeSrc: v.before ? `/before-after/${encodeURIComponent(v.before)}` : null,
       afterSrc: v.after ? `/before-after/${encodeURIComponent(v.after)}` : null,
     }))
@@ -68,6 +89,10 @@ export default async function GalleryPage() {
           <p className="mt-2 text-sm text-white/80 md:text-base">
             Boyasız göçük, bakım ve onarım örnekleri.
           </p>
+        </div>
+
+        <div className="mt-8">
+          <GalleryIntro />
         </div>
 
         <div className="mt-8">
